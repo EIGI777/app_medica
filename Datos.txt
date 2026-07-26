@@ -12,21 +12,8 @@ npm init -y
 npm install @capacitor/core @capacitor/cli
 npx cap init "AppMedica" "com.appmedica.core" --web-dir .
 
-2. 
 
-Bloque 1: Servidor Local, PWA y Primer APK "Hola Mundo" (Pasos 1–5)
-Paso 1: Configurar el entorno Linux en la Chromebook con Java 17, Node/Python (servidor web local) y SDK/Cordova/Capacitor para compilación de APK.
 
-Paso 2: Crear el código fuente base (index.html + app.js) con la interfaz "Hola Mundo" y un indicador visual de rendimiento.
-
-Paso 3: Servir la app en la red local y probarla via web/navegador abriendo la IP de la Chromebook desde el Redmi Note 14 y el Samsung A02.
-
-Paso 4: Compilar el primer APK borrador ("Hola Mundo") e instalarlo físicamente vía USB/APK directo en el Redmi Note y el Samsung A02.
-
-Paso 5: [VALIDACIÓN 1] Confirmar que la app abre nativamente como APK en los dos teléfonos y por navegador web en la Chromebook simultáneamente.
-
-Bloque 2: Persistencia SQLite Multidispositivo (Pasos 6–10)
-Paso 6: Integrar el plugin/librería de SQLite nativo en el código del APK y la base IndexedDB/SQLite en la versión Web.
 
 Paso 7: Generar el archivo de base de datos local app_medica.db al iniciar la app.
 

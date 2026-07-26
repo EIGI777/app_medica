@@ -3,91 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App Médica - Core</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #0f172a; color: #f8fafc; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        .container { width: 100%; max-width: 480px; }
-        .header { text-align: center; margin-bottom: 20px; padding: 15px; background: #1e293b; border-radius: 12px; border: 1px solid #334155; }
-        .header h1 { color: #38bdf8; font-size: 20px; }
-        .header p { color: #94a3b8; font-size: 13px; margin-top: 5px; }
-        .device-badge { display: inline-block; background: #0284c7; color: white; padding: 4px 12px; border-radius: 12px; font-size: 11px; margin-top: 8px; font-weight: bold; }
-        
-        .card { background: #1e293b; padding: 20px; border-radius: 12px; border: 1px solid #334155; margin-bottom: 15px; }
-        .card h2 { font-size: 16px; color: #f1f5f9; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        
-        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .btn { background: #334155; color: #f8fafc; border: none; padding: 12px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; text-align: center; }
-        .btn-active { background: #0284c7; }
-        .btn-disabled { background: #1e293b; color: #64748b; border: 1px dashed #475569; }
-        
-        .status-box { background: #0f172a; padding: 12px; border-radius: 8px; border: 1px solid #334155; font-size: 12px; color: #38bdf8; margin-top: 10px; }
-        
-        /* Modal de construcción */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 100; }
-        .modal-content { background: #1e293b; padding: 25px; border-radius: 12px; max-width: 320px; text-align: center; border: 1px solid #0284c7; }
-        .modal-content h3 { color: #38bdf8; margin-bottom: 10px; font-size: 18px; }
-        .modal-content p { color: #cbd5e1; font-size: 14px; margin-bottom: 20px; }
-        .close-btn { background: #0284c7; color: white; border: none; padding: 8px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; }
-    </style>
+    <title>App Médica Gil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {theme: {extend: {fontFamily: {sans: ['Inter', 'sans-serif'],},colors: {brand: {50: '#f0f9ff',100: '#e0f2fe',400: '#38bdf8',500: '#0ea5e9',600: '#0284c7',900: '#0c4a6e',}}}}}
+    </script>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+    
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col md:flex-row relative overflow-x-hidden">
 
-<div class="container">
-    <div class="header">
-        <h1>🏥 App Médica & Gestión Core</h1>
-        <p>Fase 1.1 - Cimientos & Cifrado</p>
-        <div id="device-tag" class="device-badge">Detectando hardware...</div>
+  <!-- Botón Móvil para abrir/cerrar Menú -->
+  <button id="sidebar-toggle" class="md:hidden fixed top-4 left-4 z-50 p-2.5 bg-brand-600 text-white rounded-lg shadow-lg focus:outline-none hover:bg-brand-500 transition-all">
+    <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  </button>
+
+  <!-- Overlay para fondo oscuro en Móviles -->
+  <div id="sidebar-overlay" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-30 hidden md:hidden transition-opacity"></div>
+
+  <!-- Menú Lateral (Sidebar) -->
+  <aside id="sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen bg-slate-950 border-r border-slate-800 flex flex-col justify-between transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+    
+    <div>
+      <!-- Cabecera del Menú -->
+      <div class="h-16 flex items-center px-6 border-b border-slate-800/80">
+        <span class="text-xl font-bold text-brand-400 tracking-wide flex items-center gap-2">
+          🏥 Core App
+        </span>
+      </div>
+
+      <!-- Navegación Principal -->
+      <nav class="p-4 space-y-1.5">
+        <a href="#trabajo" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium">
+          <span class="text-lg">📋</span> Trabajo
+        </a>
+        <a href="#hogar" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium">
+          <span class="text-lg">🏠</span> Hogar
+        </a>
+        <a href="#academico" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium">
+          <span class="text-lg">🎓</span> Académico
+        </a>
+        <a href="#ia" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium">
+          <span class="text-lg">🤖</span> IA
+        </a>
+        <a href="#permisos" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium">
+          <span class="text-lg">🔑</span> Permisos
+        </a>
+      </nav>
     </div>
 
-    <!-- Módulo Activo: Login & Seguridad Base -->
-    <div class="card">
-        <h2>🔐 Estado de Seguridad (Fase 1.1)</h2>
+    <!-- Opción Inferior: Configuración -->
+    <div class="p-4 border-t border-slate-800/80">
+      <a href="#configuracion" class="flex items-center gap-3 px-4 py-3 text-slate-400 rounded-xl hover:bg-slate-800/70 hover:text-slate-100 transition-colors font-medium">
+        <span class="text-lg">⚙️</span> Configuración
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- Contenido Principal (Tu vista previa adaptada al espacio del sidebar) -->
+  <main class="flex-1 md:ml-64 p-6 transition-all">
+    <div class="container max-w-4xl mx-auto">
+      
+      <div class="header mb-6">
+        <h1 class="text-2xl font-bold">🏥 App Médica & Gestión Core</h1>
+        <p class="text-slate-400">Fase 1.1 - Cimientos & Cifrado</p>
+        <div id="device-tag" class="device-badge mt-2 inline-block px-3 py-1 bg-slate-800 text-xs rounded-full border border-slate-700">Detectando hardware...</div>
+      </div>
+
+      <!-- Módulo Activo: Login & Seguridad Base -->
+      <div class="card mb-6">
+        <h2 class="text-lg font-semibold mb-2">🔐 Estado de Seguridad (Fase 1.1)</h2>
         <div class="status-box" id="db-status">
-            Base de datos local: <strong style="color:#4ade80;">Lista para inicializar</strong><br>
-            Cifrado: <strong>SQLCipher / AES (Pendiente)</strong>
+          Base de datos local: <strong class="text-emerald-400">Lista para inicializar</strong><br>
+          Cifrado: <strong>SQLCipher / AES (Pendiente)</strong>
         </div>
-    </div>
+      </div>
 
-    <!-- Módulos de la App -->
-    <div class="card">
-        <h2>📂 Módulos del Sistema</h2>
-        <div class="btn-grid">
-            <button class="btn btn-active" onclick="alert('Módulo de Historias Clínicas: En desarrollo activo para la Fase 1.2')">📋 Historias Médicas</button>
-            <button class="btn btn-disabled" onclick="openModal('Módulo de Hogar y Domótica')">🏠 Hogar & Domótica</button>
-            <button class="btn btn-disabled" onclick="openModal('Módulo de Producción & Granja')">🌾 Granja & Veterinaria</button>
-            <button class="btn btn-disabled" onclick="openModal('Módulo de CAD/CNC/3D')">🛠️ Taller & Fabricación</button>
+      <!-- Módulos de la App -->
+      <div class="card">
+        <h2 class="text-lg font-semibold mb-2">📂 Módulos del Sistema</h2>
+        <div class="btn-grid flex flex-wrap gap-3">
+          <button class="btn btn-active" onclick="alert('Módulo de Historias Clínicas: En desarrollo activo para la Fase 1.2')">📋 Historias Médicas</button>
+          <button class="btn btn-disabled" onclick="openModal('Módulo de Hogar y Domótica')">🏠 Hogar & Domótica</button>
+          <button class="btn btn-disabled" onclick="openModal('Módulo de Producción & Granja')">🌾 Granja & Veterinaria</button>
+          <button class="btn btn-disabled" onclick="openModal('Módulo de CAD/CNC/3D')">🛠️ Taller & Fabricación</button>
         </div>
-    </div>
-</div>
+      </div>
 
-<!-- Ventana Emergente para Módulos en Construcción -->
-<div id="devModal" class="modal">
+    </div>
+  </main>
+
+  <!-- Ventana Emergente para Módulos en Construcción -->
+  <div id="devModal" class="modal">
     <div class="modal-content">
-        <h3>🚧 Módulo en Desarrollo</h3>
-        <p id="modalText">En un futuro estará disponible, estamos trabajando en ello.</p>
-        <button class="close-btn" onclick="closeModal()">Entendido</button>
+      <h3>🚧 Módulo en Desarrollo</h3>
+      <p id="modalText">En un futuro estará disponible, estamos trabajando en ello.</p>
+      <button class="close-btn" onclick="closeModal()">Entendido</button>
     </div>
-</div>
+  </div>
 
-<script>
-    // Detección básica de entorno de hardware
-    const ua = navigator.userAgent;
-    let devName = "Chromebook / Servidor Local";
-    if (ua.includes("Android")) {
-        devName = ua.includes("Samsung") ? "Samsung A02 (Gama Entrada)" : "Redmi Note / Android Móvil";
-    }
-    document.getElementById("device-tag").innerText = "Dispositivo: " + devName;
-
-    function openModal(moduleName) {
-        document.getElementById("modalText").innerHTML = `<strong>${moduleName}</strong><br><br>En un futuro estará disponible, estamos trabajando en ello.`;
-        document.getElementById("devModal").style.display = "flex";
-    }
-
-    function closeModal() {
-        document.getElementById("devModal").style.display = "none";
-    }
-</script>
-
+  <script type="module" src="script.js"></script>
 </body>
 </html>
