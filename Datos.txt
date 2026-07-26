@@ -1,0 +1,81 @@
+Hostname de Chromebook: 100.115.92.197
+Hostname del Wifi: 172.16.0.8:8080
+
+Entrar al app: cd ~/app_medica/android
+
+Conectarse al Server
+npx http-server . -p 8080
+
+Descargar apk
+1. Preparar el Empaquetado:
+npm init -y
+npm install @capacitor/core @capacitor/cli
+npx cap init "AppMedica" "com.appmedica.core" --web-dir .
+
+2. 
+
+Bloque 1: Servidor Local, PWA y Primer APK "Hola Mundo" (Pasos 1–5)
+Paso 1: Configurar el entorno Linux en la Chromebook con Java 17, Node/Python (servidor web local) y SDK/Cordova/Capacitor para compilación de APK.
+
+Paso 2: Crear el código fuente base (index.html + app.js) con la interfaz "Hola Mundo" y un indicador visual de rendimiento.
+
+Paso 3: Servir la app en la red local y probarla via web/navegador abriendo la IP de la Chromebook desde el Redmi Note 14 y el Samsung A02.
+
+Paso 4: Compilar el primer APK borrador ("Hola Mundo") e instalarlo físicamente vía USB/APK directo en el Redmi Note y el Samsung A02.
+
+Paso 5: [VALIDACIÓN 1] Confirmar que la app abre nativamente como APK en los dos teléfonos y por navegador web en la Chromebook simultáneamente.
+
+Bloque 2: Persistencia SQLite Multidispositivo (Pasos 6–10)
+Paso 6: Integrar el plugin/librería de SQLite nativo en el código del APK y la base IndexedDB/SQLite en la versión Web.
+
+Paso 7: Generar el archivo de base de datos local app_medica.db al iniciar la app.
+
+Paso 8: Crear la tabla de prueba test_ping e insertar un registro inicial "Hola Mundo DB - [Dispositivo]".
+
+Paso 9: Instalar la actualización del APK en el Redmi y Samsung A02 para verificar que la DB se crea en el almacenamiento interno de cada teléfono.
+
+Paso 10: [VALIDACIÓN 2] Realizar una lectura/escritura de prueba en la pantalla de la Chromebook, el Redmi y el Samsung A02, confirmando que la persistencia funciona en las 3 plataformas.
+
+Bloque 3: Cifrado en Reposo (SQLCipher / AES) Proporcionado y Bloqueado (Pasos 11–15)
+Paso 11: Implementar SQLCipher (o módulo de cifrado AES) con derivación de llave maestra (PBKDF2/Argon2).
+
+Paso 12: Configurar la pantalla de "Desbloqueo de Clave Maestra" en la interfaz.
+
+Paso 13: Generar la versión cifrada del APK y desplegarla a los dos teléfonos y la Chromebook.
+
+Paso 14: [PRUEBA DE ATAQUE/BLOQUEO] Intentar extraer el archivo .db con un explorador de archivos desde el Samsung A02 y el Redmi para abrirlo en una PC (debe dar error de "archivo corrupto/cifrado").
+
+Paso 15: [VALIDACIÓN 3] Ingresar la contraseña correcta desde los 3 equipos y confirmar que la base de datos se desencripta en memoria y muestra los datos.
+
+Bloque 4: Tablas Core de Usuarios y Roles (Pasos 16–20)
+Paso 16: Ejecutar el script DDL para crear la tabla cifrada users (user_id, username, password_hash, salt, created_at).
+
+Paso 17: Implementar la rutina de Hash seguro (bcrypt / SHA-256 + Salt) para el registro e inicio de sesión.
+
+Paso 18: Crear la tabla roles y poblarla con los niveles del hospital (Director=0, Adjunto=1, R1-R3=2-4, Estudiante, Enfermería, Camillero, Paciente).
+
+Paso 19: Crear la tabla de relación user_roles para vincular cuentas con jerarquías.
+
+Paso 20: [VALIDACIÓN 4] Crear un usuario de prueba en la Chromebook, uno en el Redmi y otro en el Samsung A02; verificar que las credenciales cifradas se guardan e inician sesión correctamente en cada equipo.
+
+Bloque 5: Estructura Preparatoria de Permisos y Bitácora Auditora (Pasos 21–25)
+Paso 21: Crear la tabla permissions (permission_id, entity_name, can_create, can_read, can_update, can_delete, min_hierarchy_to_edit).
+
+Paso 22: Registrar las reglas iniciales (ej: R1 crea pero no edita diagnósticos creados por un Adjunto).
+
+Paso 23: Crear la tabla inmutable audit_logs (log_id, user_id, action, target_entity, timestamp, old_value, new_value).
+
+Paso 24: Programar el Disparador (Trigger) interno que guarda automáticamente en audit_logs cualquier intento de creación o modificación.
+
+Paso 25: [VALIDACIÓN 5] Realizar una modificación de datos en el Redmi y en el Samsung A02; verificar que la tabla audit_logs registre el ID del dispositivo, la hora exacta y el usuario que ejecutó la acción.
+
+Bloque 6: Pruebas de Estrés, Conexión Local Mesh y Entrega de APK v1.1 (Pasos 26–30)
+Paso 26: Prueba de Rendimiento / Gama Baja: Insertar 500 registros continuos en el Samsung A02 para asegurar que el procesador modesto no cuelgue la app con el cifrado activo.
+
+Paso 27: Probar el módulo de sincronización local punto a punto (Mesh/Tailscale/WireGuard) pasando datos cifrados entre el Redmi y la Chromebook sin salir a internet público.
+
+Paso 28: Probar la rutina de Respaldo Cifrado (.backup) exportando e importando la base de datos entre el Redmi y el Samsung A02.
+
+Paso 29: Probar la recuperación tras fallo: Forzar el cierre de la app (Kill process) a mitad de una escritura en los teléfonos y verificar que la base cifrada no sufra corrupción al reabrir.
+
+Paso 30: [VALIDACIÓN FINAL FASE 1.1] Generación del APK final estable v1.1. Instalación limpia en el Redmi Note 14 Pro+ y Samsung A02, y despliegue Web en la Chromebook. Todo probado, verificado y listo para construir la interfaz médica (Fase 1.2).

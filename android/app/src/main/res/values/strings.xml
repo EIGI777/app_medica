@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">AppMedica</string>
+    <string name="title_activity_main">AppMedica</string>
+    <string name="package_name">com.appmedica.core</string>
+    <string name="custom_url_scheme">com.appmedica.core</string>
+</resources>
