@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.2",
   "updated_at": "2026-08-09",
-  "changelog": "Añadida vista de Historias Clínicas y Formulario Dinámico"
+  "changelog": "Prueba de actualización automática OTA exitosa"
 }
