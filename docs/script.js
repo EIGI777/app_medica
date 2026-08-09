@@ -1,5 +1,5 @@
 // script.js - Punto de Entrada Principal (Ultra conciso)
-
+import { checkForUpdates } from './updater.js';
 import { detectHardwareEnvironment } from './hardware.js';
 import { renderRecordsList } from './ui.js';
 import { bindAppEvents } from './events.js';
@@ -21,4 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     bindAppEvents(patientsData, (updatedRecords) => {
         renderRecordsList(updatedRecords);
     });
+
+    // 4. Verificar actualizaciones silenciosas en segundo plano
+    checkForUpdates();
 });
