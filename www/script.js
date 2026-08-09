@@ -1,34 +1,24 @@
-// script.js
+// script.js - Punto de Entrada Principal (Ultra conciso)
+
 import { detectHardwareEnvironment } from './hardware.js';
+import { renderRecordsList } from './ui.js';
+import { bindAppEvents } from './events.js';
+
+// Arreglo central temporal con las historias
+const patientsData = [];
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Detectar hardware y actualizar el DOM
-    detectHardwareEnvironment((hardwareText) => {
+    // 1. Detectar hardware
+    detectHardwareEnvironment(text => {
         const tag = document.getElementById("device-tag");
-        if (tag) tag.innerText = "Dispositivo: " + hardwareText;
+        if (tag) tag.innerText = "Dispositivo: " + text;
     });
 
-    // Lógica del Sidebar Móvil
-    const toggleBtn = document.getElementById('sidebar-toggle');
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebar-overlay');
+    // 2. Renderizar lista inicial de historias
+    renderRecordsList(patientsData);
 
-    function toggleSidebar() {
-        const isOpen = !sidebar.classList.contains('-translate-x-full');
-        sidebar.classList.toggle('-translate-x-full', isOpen);
-        overlay.classList.toggle('hidden', isOpen);
-    }
-
-    toggleBtn?.addEventListener('click', toggleSidebar);
-    overlay?.addEventListener('click', toggleSidebar);
+    // 3. Vincular eventos e interactividad
+    bindAppEvents(patientsData, (updatedRecords) => {
+        renderRecordsList(updatedRecords);
+    });
 });
-
-// Modales
-window.openModal = function(moduleName) {
-    document.getElementById("modalText").innerHTML = `<strong>${moduleName}</strong><br><br>En un futuro estará disponible, estamos trabajando en ello.`;
-    document.getElementById("devModal").style.display = "flex";
-};
-
-window.closeModal = function() {
-    document.getElementById("devModal").style.display = "none";
-};

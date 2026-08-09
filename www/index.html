@@ -33,25 +33,25 @@
       <!-- Cabecera del Menú -->
       <div class="h-16 flex items-center px-6 border-b border-slate-800/80">
         <span class="text-xl font-bold text-brand-400 tracking-wide flex items-center gap-2">
-          🏥 Core App
+          ....   🏥 AppMedica
         </span>
       </div>
 
       <!-- Navegación Principal -->
       <nav class="p-4 space-y-1.5">
-        <a href="#trabajo" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium">
+        <a href="#trabajo" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium" onclick="alert('Módulo de Historias Clínicas: En desarrollo activo para la Fase 1.2')">
           <span class="text-lg">📋</span> Trabajo
         </a>
-        <a href="#hogar" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium">
+        <a href="#hogar" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium" onclick="alert('Módulo de Historias Clínicas: En desarrollo activo para la Fase 1.2')">
           <span class="text-lg">🏠</span> Hogar
         </a>
-        <a href="#academico" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium">
+        <a href="#academico" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium" onclick="alert('Módulo de Historias Clínicas: En desarrollo activo para la Fase 1.2')">
           <span class="text-lg">🎓</span> Académico
         </a>
-        <a href="#ia" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium">
+        <a href="#ia" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium" onclick="alert('Módulo de Historias Clínicas: En desarrollo activo para la Fase 1.2')">
           <span class="text-lg">🤖</span> IA
         </a>
-        <a href="#permisos" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium">
+        <a href="#permisos" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium" onclick="alert('Módulo de Historias Clínicas: En desarrollo activo para la Fase 1.2')">
           <span class="text-lg">🔑</span> Permisos
         </a>
       </nav>
@@ -59,7 +59,7 @@
 
     <!-- Opción Inferior: Configuración -->
     <div class="p-4 border-t border-slate-800/80">
-      <a href="#configuracion" class="flex items-center gap-3 px-4 py-3 text-slate-400 rounded-xl hover:bg-slate-800/70 hover:text-slate-100 transition-colors font-medium">
+      <a href="#configuracion" class="flex items-center gap-3 px-4 py-3 text-slate-400 rounded-xl hover:bg-slate-800/70 hover:text-slate-100 transition-colors font-medium" onclick="alert('Módulo de Historias Clínicas: En desarrollo activo para la Fase 1.2')">
         <span class="text-lg">⚙️</span> Configuración
       </a>
     </div>
@@ -71,30 +71,37 @@
     <div class="container max-w-4xl mx-auto">
       
       <div class="header mb-6">
-        <h1 class="text-2xl font-bold">🏥 App Médica & Gestión Core</h1>
-        <p class="text-slate-400">Fase 1.1 - Cimientos & Cifrado</p>
+        <h1 class="text-2xl font-bold">🏥 Aplicacion Médica</h1>
+        <p class="text-slate-400">Version 0.0.1</p>
         <div id="device-tag" class="device-badge mt-2 inline-block px-3 py-1 bg-slate-800 text-xs rounded-full border border-slate-700">Detectando hardware...</div>
       </div>
 
       <!-- Módulo Activo: Login & Seguridad Base -->
       <div class="card mb-6">
-        <h2 class="text-lg font-semibold mb-2">🔐 Estado de Seguridad (Fase 1.1)</h2>
+        <h2 class="text-lg font-semibold mb-2">🔐 Estado de Seguridad</h2>
         <div class="status-box" id="db-status">
-          Base de datos local: <strong class="text-emerald-400">Lista para inicializar</strong><br>
+          Base de datos local: <strong class="text-emerald-400">En Construccion</strong><br>
           Cifrado: <strong>SQLCipher / AES (Pendiente)</strong>
         </div>
       </div>
 
       <!-- Módulos de la App -->
-      <div class="card">
-        <h2 class="text-lg font-semibold mb-2">📂 Módulos del Sistema</h2>
-        <div class="btn-grid flex flex-wrap gap-3">
-          <button class="btn btn-active" onclick="alert('Módulo de Historias Clínicas: En desarrollo activo para la Fase 1.2')">📋 Historias Médicas</button>
-          <button class="btn btn-disabled" onclick="openModal('Módulo de Hogar y Domótica')">🏠 Hogar & Domótica</button>
-          <button class="btn btn-disabled" onclick="openModal('Módulo de Producción & Granja')">🌾 Granja & Veterinaria</button>
-          <button class="btn btn-disabled" onclick="openModal('Módulo de CAD/CNC/3D')">🛠️ Taller & Fabricación</button>
-        </div>
-      </div>
+      <div class="card bg-slate-800/60 p-5 rounded-2xl border border-slate-700/60">
+  <div class="flex items-center justify-between gap-2 mb-4 border-b border-slate-700/50 pb-3">
+    <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">📂 Historias Clínicas</h2>
+    <div class="flex items-center gap-2">
+      <select id="filter-status" class="bg-slate-900 text-slate-300 text-xs px-2.5 py-1.5 rounded-lg border border-slate-700 focus:outline-none">
+        <option value="all">Todas</option>
+        <option value="active">En curso</option>
+        <option value="archived">Alta</option>
+      </select>
+      <button id="btn-add-record" title="Nueva Historia" class="w-8 h-8 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-lg shadow flex items-center justify-center transition-all">
+        ➕
+      </button>
+    </div>
+  </div>
+  <div id="medical-records-list" class="min-h-[140px] flex items-center justify-center"></div>
+</div>
 
     </div>
   </main>
