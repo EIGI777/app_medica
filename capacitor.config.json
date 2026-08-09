@@ -1,5 +1,6 @@
 {
-  "appId": "com.appmedica.core",
+  "appId": "com.appmedica.gil",
   "appName": "AppMedica",
-  "webDir": "www"
+  "webDir": "docs",
+  "bundledWebRuntime": false
 }
