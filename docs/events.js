@@ -1,4 +1,4 @@
-// events.js - Manejo de Eventos (Top-Down)
+// docs/events.js - Manejo de Eventos e Interacciones (Top-Down)
 
 import { toggleModal, renderDynamicPatientForm } from './ui.js';
 import { createPatientModel } from './patient.js';
@@ -30,7 +30,9 @@ function bindMedicalRecordsEvents(patientsStore, onSaveSuccess) {
         renderDynamicPatientForm(modalContainerId, emptyModel);
 
         const form = document.getElementById('dynamic-patient-form');
-        form?.addEventListener('submit', (e) => {
+        
+        // Marcamos la función como 'async' para poder usar 'await' con Firebase
+        form?.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(form);
 
@@ -50,37 +52,23 @@ function bindMedicalRecordsEvents(patientsStore, onSaveSuccess) {
                 newPatient.current_status.current_treatment = treatments.split(',').map(s => s.trim());
             }
 
-            // 1. Agregar al arreglo en memoria
-            patientsStore.push(newPatient);
+            // 1. Guardar en la nube (o marcar como pendiente si está offline)
+            await savePatientToCloud(newPatient);
 
-            // 2. Persistir en el disco local (localStorage)
+            // 2. Actualizar almacenamiento local
+            const existingIndex = patientsStore.findIndex(p => p.id === newPatient.id);
+            if (existingIndex >= 0) {
+                patientsStore[existingIndex] = newPatient;
+            } else {
+                patientsStore.push(newPatient);
+            }
             savePatientsToStorage(patientsStore);
 
-            // 3. Notificar renderizado y cerrar modal
+            // 3. Renderizar y cerrar modal
             onSaveSuccess(patientsStore);
             toggleModal('', '', false);
         });
 
-        // Dentro del event listener del formulario (form.addEventListener('submit', ...)):
-// Reemplazar la parte donde se agrega al arreglo:
-
-// 1. Guardar en la nube (o marcar como pendiente si está offline)
-await savePatientToCloud(newPatient);
-
-// 2. Actualizar almacenamiento local
-const existingIndex = patientsStore.findIndex(p => p.id === newPatient.id);
-if (existingIndex >= 0) {
-    patientsStore[existingIndex] = newPatient;
-} else {
-    patientsStore.push(newPatient);
-}
-savePatientsToStorage(patientsStore);
-
-// 3. Renderizar y cerrar modal
-onSaveSuccess(patientsStore);
-toggleModal('', '', false);
-
         form?.querySelector('.close-btn')?.addEventListener('click', () => toggleModal('', '', false));
     });
 }
-
