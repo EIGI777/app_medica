@@ -1,11 +1,9 @@
 // firebase-config.js - Configuración e Inicialización de Firebase SDK (v10 Modular)
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-//import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-// Your web app's Firebase configuration
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+// Configuración web de Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyDj7S3chvOsrdHhY14nNKLk1TizVPDuhOo",
   authDomain: "app-medica-gil.firebaseapp.com",
