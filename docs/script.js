@@ -1,30 +1,39 @@
-// script.js - Entrada principal
-import { detectHardwareEnvironment } from './hardware.js';
+/*...script.js 
+Entrada principal
+*/
+
+//IMPORTACIONES
+
+import { getHardware } from './hardware.js';
 import { renderRecordsList } from './ui.js';
 import { bindAppEvents } from './events.js';
 import { loadPatientsFromStorage } from './storage.js';
 import { listenForCloudUpdates } from './syncService.js';
 
-let patientsData = loadPatientsFromStorage();
+//VARIABLES
+
+let BD_SD = loadPatientsFromStorage();
+
+const hardware = document.getElementById("device-tag");
+
+function hardwareTag(){getHardware(text => {if (hardware) hardware.innerText = "Dispositivo: " + text;});}
+
+//FUNCIONES
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Diagnóstico de hardware
-    detectHardwareEnvironment(text => {
-        const tag = document.getElementById("device-tag");
-        if (tag) tag.innerText = "Dispositivo: " + text;
-    });
-
+    hardwareTag(); //Info de Hardware
+    
     // 2. Renderizar historias recuperadas de la memoria local
-    renderRecordsList(patientsData);
+    renderRecordsList(BD_SD);
 
     // 3. Vincular eventos
-    bindAppEvents(patientsData, (updatedRecords) => {
+    bindAppEvents(BD_SD, (updatedRecords) => {
         renderRecordsList(updatedRecords);
     });
 
     // 4. Iniciar escucha en tiempo real de Firebase
     listenForCloudUpdates((cloudRecords) => {
-        patientsData = cloudRecords;
-        renderRecordsList(patientsData);
+        BD_SD = cloudRecords;
+        renderRecordsList(BD_SD);
     });
 });

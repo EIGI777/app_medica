@@ -1,5 +1,5 @@
 // hardware.js
-export function detectHardwareEnvironment(callback) {
+export function getHardware(callback) {
     const ua = navigator.userAgent;
     let os = "Desconocido";
     let deviceType = "Escritorio";
