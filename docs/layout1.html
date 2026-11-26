@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Médica Gil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {theme: {extend: {fontFamily: {sans: ['Inter', 'sans-serif'],},colors: {brand: {50: '#f0f9ff',100: '#e0f2fe',400: '#38bdf8',500: '#0ea5e9',600: '#0284c7',900: '#0c4a6e',}}}}}
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+    
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col md:flex-row relative overflow-x-hidden">
+
+  <!-- Botón Móvil para abrir/cerrar Menú -->
+  <button id="sidebar-toggle" class="md:hidden fixed top-4 left-4 z-50 p-2.5 bg-brand-600 text-white rounded-lg shadow-lg focus:outline-none hover:bg-brand-500 transition-all">
+    <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  </button>
+
+  <!-- Overlay para fondo oscuro en Móviles -->
+  <div id="sidebar-overlay" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-30 hidden md:hidden transition-opacity"></div>
+
+  <!-- Menú Lateral (Sidebar) -->
+  <aside id="sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen bg-slate-950 border-r border-slate-800 flex flex-col justify-between transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+    
+    <div>
+      <!-- Cabecera del Menú -->
+      <div class="h-16 flex items-center px-6 border-b border-slate-800/80">
+        <span class="text-xl font-bold text-brand-400 tracking-wide flex items-center gap-2">
+          ......   🏥 AppMedica
+        </span>
+      </div>
+
+      <!-- Navegación Principal -->
+      <nav class="p-4 space-y-1.5">
+        <a href="#trabajo" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium" onclick="alert('Módulo de Historias Clínicas: En desarrollo activo para la Fase 1.2')">
+          <span class="text-lg">📋</span> Trabajo
+        </a>
+        <a href="#hogar" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium" onclick="alert('Módulo de Historias Clínicas: En desarrollo activo para la Fase 1.2')">
+          <span class="text-lg">🏠</span> Hogar
+        </a>
+        <a href="#academico" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium" onclick="alert('Módulo de Historias Clínicas: En desarrollo activo para la Fase 1.2')">
+          <span class="text-lg">🎓</span> Académico
+        </a>
+        <a href="#ia" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium" onclick="alert('Módulo de Historias Clínicas: En desarrollo activo para la Fase 1.2')">
+          <span class="text-lg">🤖</span> IA
+        </a>
+        <a href="#permisos" class="flex items-center gap-3 px-4 py-3 text-slate-300 rounded-xl hover:bg-slate-800/70 hover:text-brand-400 transition-colors font-medium" onclick="alert('Módulo de Historias Clínicas: En desarrollo activo para la Fase 1.2')">
+          <span class="text-lg">🔑</span> Permisos
+        </a>
+      </nav>
+    </div>
+
+    <!-- Opción Inferior: Configuración -->
+    <div class="p-4 border-t border-slate-800/80">
+      <a href="#configuracion" class="flex items-center gap-3 px-4 py-3 text-slate-400 rounded-xl hover:bg-slate-800/70 hover:text-slate-100 transition-colors font-medium" onclick="alert('Módulo de Historias Clínicas: En desarrollo activo para la Fase 1.2')">
+        <span class="text-lg">⚙️</span> Configuración
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- Contenido Principal (Tu vista previa adaptada al espacio del sidebar) -->
+  <main class="flex-1 md:ml-64 p-6 transition-all">
+    <div class="container max-w-4xl mx-auto">
+      
+      <div class="header mb-6">
+        <h1 class="text-2xl font-bold">🏥 Aplicacion Médica</h1>
+        <p class="text-emerald-400 font-semibold">Version 0.0.2 (OTA Sync Activo)</p>
+        <div id="device-tag" class="device-badge mt-2 inline-block px-3 py-1 bg-slate-800 text-xs rounded-full border border-slate-700">Detectando hardware...</div>
+      </div>
+
+      <!-- Módulo Activo: Login & Seguridad Base -->
+      <div class="card mb-6">
+        <h2 class="text-lg font-semibold mb-2">🔐 Estado de Seguridad</h2>
+        <div class="status-box" id="db-status">
+          Base de datos local: <strong class="text-emerald-400">En Construccion</strong><br>
+          Cifrado: <strong>SQLCipher / AES (Pendiente)</strong>
+        </div>
+      </div>
+
+      <!-- Módulos de la App -->
+      <div class="card bg-slate-800/60 p-5 rounded-2xl border border-slate-700/60">
+  <div class="flex items-center justify-between gap-2 mb-4 border-b border-slate-700/50 pb-3">
+    <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">📂 Historias Clínicas</h2>
+    <div class="flex items-center gap-2">
+      <select id="filter-status" class="bg-slate-900 text-slate-300 text-xs px-2.5 py-1.5 rounded-lg border border-slate-700 focus:outline-none">
+        <option value="all">Todas</option>
+        <option value="active">En curso</option>
+        <option value="archived">Alta</option>
+      </select>
+      <button id="btn-add-record" title="Nueva Historia" class="w-8 h-8 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-lg shadow flex items-center justify-center transition-all">
+        ➕
+      </button>
+    </div>
+  </div>
+  <div id="medical-records-list" class="min-h-[140px] flex items-center justify-center"></div>
+</div>
+
+    </div>
+  </main>
+
+  <!-- Ventana Emergente para Módulos en Construcción -->
+  <div id="devModal" class="modal">
+    <div class="modal-content">
+      <h3>🚧 Módulo en Desarrollo</h3>
+      <p id="modalText">En un futuro estará disponible, estamos trabajando en ello.</p>
+      <button class="close-btn" onclick="closeModal()">Entendido</button>
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
